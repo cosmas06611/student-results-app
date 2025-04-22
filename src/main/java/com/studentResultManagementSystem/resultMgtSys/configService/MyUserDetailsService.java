@@ -1,6 +1,7 @@
 package com.studentResultManagementSystem.resultMgtSys.configService;
 
 import com.studentResultManagementSystem.resultMgtSys.configRepository.UserRepo;
+import com.studentResultManagementSystem.resultMgtSys.model.UserPrincipal;
 import com.studentResultManagementSystem.resultMgtSys.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,12 +19,11 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String staffNo) throws UsernameNotFoundException {
-
         Users user = userRepo.findByStaffNo(staffNo);
         if(user == null){
             System.out.println("User Not Found");
-            throw new UsernameNotFoundException("user not found");
+            throw new UsernameNotFoundException("user not found + staffNo");
         }else
-            return null;
+            return new UserPrincipal(user);
     }
 }

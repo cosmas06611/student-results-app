@@ -19,7 +19,7 @@ public class StudentController {
 
     @Autowired
     private StudentService studentService;
-
+//to get all student , this feature is solely for admin right and not user
     @GetMapping("/students")
     public ResponseEntity <List<StudentUser>> getAllStudent(){
        List <StudentUser> studUser = studentService.getStudentUser();
@@ -30,6 +30,7 @@ public class StudentController {
         }
     }
 
+//    this feature is for individual staff who can view only his/her result
     @GetMapping("/students/{staffNo}")
     public ResponseEntity<StudentUser> getStudentById(@PathVariable String staffNo){
         StudentUser studUser = studentService.getStudentById(staffNo);
@@ -40,16 +41,20 @@ public class StudentController {
        }
     }
 
+//    this feature is strictly for admin right to add result from the UI
     @PostMapping("/student")
     public void addStudentById(@RequestBody StudentUser newUser){
         studentService.addStudent(newUser);
     }
 
+
+//    this feature is for admin to update result of staff
     @PutMapping("/student")
     public void updateStudentUser(@RequestBody StudentUser updateUser){
         studentService.updateStudentUser(updateUser);
     }
 
+//    this feature is for admin only to enable deleting of result
     @DeleteMapping("/student/{staffNo}")
     public void deleteStudentUser(@PathVariable String staffNo){
         studentService.deleteStudentUser(staffNo);
@@ -93,6 +98,7 @@ public class StudentController {
 //        }else return new ResponseEntity<>("failed to update", HttpStatus.BAD_REQUEST);
 //    }
 
+//    this feature is for user only to search for their result
     @GetMapping("/student/search")
     public ResponseEntity<List <StudentUser>> searchByStaffNo(@RequestParam String keyword){
         List <StudentUser> stud1 = studentService.searchByStaffNo(keyword);

@@ -13,10 +13,7 @@ import lombok.NoArgsConstructor;
 public class Users {
     @Id
     private String staffNo;
-    private String staffName;
-    private String staffBranch;
-    private String staffDept;
-    private String staffZone;
-
+    private String staffPassword;
+    private String role;
 
 }
